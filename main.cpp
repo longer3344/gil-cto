@@ -423,20 +423,20 @@ static void test_gnss_sins()
 	double	AccPNSD = 9.00000000e-05;
 
 	// 轨迹文件
-	int		ref_type = 1; // 0 - IPS 1 - IE
-	std::string	pos_file = "D:\\363880-363990\\363880-363990.fts";
+	int		ref_type = 0; 
+	std::string	pos_file = "363880-363990.fts";
 	std::vector<liso::PoseData> posedata;
 	liso::readPoseData(ref_type, pos_file, posedata, false);
 
 	// GNSS
 	std::vector<liso::GNSSPVA> GNSDatas;
-	std::string	gns_file = "D:\\363880-363990\\363880-363990.rtk";
+	std::string	gns_file = "363880-363990.rtk";
 	liso::readGNSSPVAData(gns_file, GNSDatas, false);
 
 	// IMU数据
 	std::vector<liso::IMUData> IMUDatas;
 	Eigen::Vector3d IMURotAngle = Eigen::Vector3d(180, 0, 90);
-	std::string	imu_file = "D:\\363880-363990\\363880-363990.imu";
+	std::string	imu_file = "363880-363990.imu";
 	liso::readIMUData(imu_file, IMUDatas, IMURotAngle*D2R);
 
 	double traj_start = posedata[0].timestamp;
@@ -547,20 +547,20 @@ static void test_gnss_sins_lidar()
 	double	AccPNSD = 9.00000000e-05;
 
 	// 轨迹文件
-	int		ref_type = 1; // 0 - IPS 1 - IE
-	std::string	pos_file = "D:\\363880-363990\\363880-363990.fts";
+	int		ref_type = 0;
+	std::string	pos_file = "363880-363990.fts";
 	std::vector<liso::PoseData> posedata;
 	liso::readPoseData(ref_type, pos_file, posedata, false);
 
 	// GNSS
 	std::vector<liso::GNSSPVA> GNSDatas;
-	std::string	gns_file = "D:\\363880-363990\\363880-363990.rtk";
+	std::string	gns_file = "363880-363990.rtk";
 	liso::readGNSSPVAData(gns_file, GNSDatas, false);
 
 	// IMU数据
 	std::vector<liso::IMUData> IMUDatas;
 	Eigen::Vector3d IMURotAngle = Eigen::Vector3d(180, 0, 90);
-	std::string	imu_file = "D:\\363880-363990\\363880-363990.imu";
+	std::string	imu_file = "363880-363990.imu";
 	liso::readIMUData(imu_file, IMUDatas, IMURotAngle*D2R);
 
 	double traj_start = posedata[0].timestamp;
@@ -616,8 +616,8 @@ static void test_gnss_sins_lidar()
 	tlb = Eigen::Vector3d(0.000, 0.000, 0.17445);
 
 	lpostk::FrameContainer frameContainer;
-	frameContainer.open_poles_filelist("D:\\363880-363990\\filelst-pole.lst");
-	frameContainer.open_planes_filelist("D:\\363880-363990\\filelst-plane.lst");
+	frameContainer.open_poles_filelist("filelst-pole.lst");
+	frameContainer.open_planes_filelist("filelst-plane.lst");
 
 	// 构建共视关系
 	frameContainer.set_frame_pose(trajectory, Rlb, tlb);
@@ -686,5 +686,6 @@ static void test_gnss_sins_lidar()
 
 int main(int argc, char *argv[])
 {	
+  test_gnss_sins_lidar();
 	return 0;
 }
